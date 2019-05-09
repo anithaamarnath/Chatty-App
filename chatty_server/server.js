@@ -34,9 +34,26 @@ wss.on('connection', (ws) => {
 
   ws.on('message', function incoming(message) {
    const obj = JSON.parse(message);
-   const objMess = {id: uuidv1(), username: obj.username, content : obj.content}
+   switch(obj.type) {
+      case "postMessage":
+        // handle incoming message
 
-   wss.broadcast(JSON.stringify(objMess));
+
+        wss.broadcast(JSON.stringify({type: "incomingMessage",id: uuidv1(), username: obj.username, content : obj.content}));
+
+        break;
+        case "postNotification":
+         objMess =
+
+        wss.broadcast(JSON.stringify({type: "incomingNotification", id: uuidv1(),content:obj.content}));
+
+        // handle incoming notification
+
+        break;
+        default:
+        // show an error in the console if the message type is unknown
+        throw new Error("Unknown event type " + obj.type);
+    }
 
 
   });
