@@ -8,7 +8,8 @@ class App extends Component {
     super(props);
     // this is the *only* time you should assign directly to state:
     this.state = {
-      currentUser :"Bob", messages: []};
+      currentUser :"Bob", messages: [],
+      userConnected: 0};
     this.addMessage = this.addMessage.bind(this);
     this.addCurrentUser = this.addCurrentUser.bind(this);
 
@@ -34,6 +35,9 @@ class App extends Component {
           case "incomingNotification":
           // handle incoming notification
             this.setState({messages: newMessages});
+              break;
+          case "userConnected" :
+          this.setState({userConnected:incomingMess.content});
               break;
           default:
           // show an error in the console if the message type is unknown
@@ -62,11 +66,14 @@ class App extends Component {
 
 
 
+
+
   render() {
     return (
       <div>
         <nav className="navbar">
           <a href="/" className="navbar-brand">Chatty</a>
+          <p className="navUser"> {this.state.userConnected} user online</p>
         </nav>
         <MessageList messages= {this.state.messages}/>
         <ChatBar currentUser = {this.state.currentUser} addMessage={this.addMessage} addCurrentUser={this.addCurrentUser} />

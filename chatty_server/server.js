@@ -33,7 +33,7 @@ wss.on('connection', (ws) => {
     });
   };
   const msgSize =  wss.clients.size;
-   wss.broadcast(JSON.stringify({type: "incomingNotification",id: uuidv1(), content : msgSize}));
+   wss.broadcast(JSON.stringify({type: "userConnected",id: uuidv1(), content : wss.clients.size}));
 
 
 
@@ -72,7 +72,7 @@ wss.on('connection', (ws) => {
   ws.on('close', () => {
     console.log('Client disconnected');
     const msgSize =  wss.clients.size;
-   wss.broadcast(JSON.stringify({type: "incomingNotification", id: uuidv1(),content:msgSize}));
+   wss.broadcast(JSON.stringify({type: "userConnected", id: uuidv1(),content:wss.clients.size}));
 
  });
 
