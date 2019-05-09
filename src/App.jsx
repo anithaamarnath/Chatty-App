@@ -1,23 +1,28 @@
 import React, {Component} from 'react';
 import MessageList  from './MessageList.jsx';
 import ChatBar  from './ChatBar.jsx';
-import messages from '../messages.json';
-import { generateRandomId } from "./utils.js";
+// import messages from '../messages.json';
+// import { generateRandomId } from "./utils.js";
 
 class App extends Component {
   constructor(props) {
     super(props);
     // this is the *only* time you should assign directly to state:
     this.state = {
+      currentUser :"Bob",
 
-      messages: messages,
-      currentUser : 'Anonymous'
+      messages: [],
+
 };
     this.addMessage = this.addMessage.bind(this);
 
   }
 
   componentDidMount() {
+    var connection = new WebSocket("ws://localhost:3001");
+    // console.log("hi",connection);
+   this.setState({connection});
+
     console.log("componentDidMount <App />");
   setTimeout(() => {
     console.log("Simulating incoming message");
@@ -31,12 +36,26 @@ class App extends Component {
 }
 
 addMessage(content) {
-    const newMessage = {id: generateRandomId() , username:this.state.currentUser, content: content};
-    const oldMessage = this.state.messages;
-    const newMessages = [...oldMessage, newMessage];
+
+ // this.state.connection.onopen = function (event) {
+ //  console.log(this.state.connection.onopen );
+
+// };
+    const newMessage = {username:this.state.currentUser, content: content};
+
+    //console.log("hey its new message", newMessage);
+    this.state.connection.send(JSON.stringify(newMessage));
+
+    this.state.connection.onmessage = event => {
+  // console.log(event.data);
+  const incomingMessage = JSON.parse(event.data);
+  const oldMessage = this.state.messages;
+    const newMessages = [...oldMessage, incomingMessage];
     this.setState ({
       messages: newMessages
     });
+}
+
 
   }
 
