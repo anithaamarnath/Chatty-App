@@ -17,7 +17,7 @@ npm install
 npm start
 open http://localhost:3000
 npm run lint
-```
+
 
 
 ### Dependencies
@@ -46,14 +46,14 @@ npm run lint
   - ws  7.0.0
 
 
- ## screenshot
-
 
 
 ## Screenshot
+!["Screenshot of Tweet page"](https://github.com/anithaamarnath/Chatty-App/blob/master/screenshot/Screen%20Shot%202019-05-09%20at%205.48.39%20PM.png)
+!["Screenshot of Tweet page"](https://github.com/anithaamarnath/Chatty-App/blob/master/screenshot/Screen%20Shot%202019-05-09%20at%205.49.14%20PM.png)
 
- !["chat first window"](https://github.com/anithaamarnath/Chatty-App/blob/master/screenshot/Screen%20Shot%202019-05-09%20at%205.48.39%20PM.png)
- !["chat second window"](https://github.com/anithaamarnath/Chatty-App/blob/master/screenshot/Screen%20Shot%202019-05-09%20at%205.49.14%20PM.png)
+
+
 
 
 
