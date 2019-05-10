@@ -6,7 +6,7 @@ import ChatBar  from './ChatBar.jsx';
 class App extends Component {
   constructor(props) {
     super(props);
-    // this is the *only* time you should assign directly to state:
+
     this.state = {
       currentUser :"Bob", messages: [],
       userConnected: 0};
@@ -29,18 +29,18 @@ class App extends Component {
           const newMessages = [...oldMessage, incomingMess];
         switch(incomingMess.type) {
           case "incomingMessage":
-          // handle incoming message
+
             this.setState ({messages: newMessages});
               break;
           case "incomingNotification":
-          // handle incoming notification
+
             this.setState({messages: newMessages});
               break;
           case "userConnected" :
           this.setState({userConnected:incomingMess.content});
               break;
           default:
-          // show an error in the console if the message type is unknown
+
             throw new Error("Unknown event type " + incomingMess.type);
         }
       }
@@ -52,21 +52,13 @@ class App extends Component {
 
   }
 
-
-
-
   addCurrentUser(username){
 
     const newMessage = {type: "postNotification", content: `${this.state.currentUser} the user name is changed ${username}`};
      this.setState({currentUser: username });
     this.state.connection.send(JSON.stringify(newMessage));
 
-
   }
-
-
-
-
 
   render() {
     return (

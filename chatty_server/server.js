@@ -14,64 +14,36 @@ const server = express()
 // Create the WebSockets server
 const wss = new SocketServer({ server });
 
-
-// Set up a callback that will run when a client connects to the server
-// When a client connects they are assigned a socket, represented by
-// the ws parameter in the callback.
-wss.on('connection', (ws) => {
-
-
-
-
-
-  wss.broadcast = function broadcast(data) {
+    wss.on('connection', (ws) => {
+    wss.broadcast = function broadcast(data) {
     wss.clients.forEach(function each(client) {
+      if (client.readyState === ws.OPEN) {
+        client.send(data);
+        }
+      });
+    };
+    const msgSize =  wss.clients.size;
+    wss.broadcast(JSON.stringify({type: "userConnected",id: uuidv1(), content : wss.clients.size}));
 
-    if (client.readyState === ws.OPEN) {
-      client.send(data);
-      }
-    });
-  };
-  const msgSize =  wss.clients.size;
-   wss.broadcast(JSON.stringify({type: "userConnected",id: uuidv1(), content : wss.clients.size}));
-
-
-
-
-  ws.on('message', function incoming(message) {
-
-
-   const obj = JSON.parse(message);
-   switch(obj.type) {
+    ws.on('message', function incoming(message) {
+      const obj = JSON.parse(message);
+    switch(obj.type) {
       case "postMessage":
-        // handle incoming message
-
-
         wss.broadcast(JSON.stringify({type: "incomingMessage",id: uuidv1(), username: obj.username, content : obj.content}));
-
         break;
-        case "postNotification":
-         objMess =
-
+      case "postNotification":
         wss.broadcast(JSON.stringify({type: "incomingNotification", id: uuidv1(),content:obj.content }));
-
-        // handle incoming notification
-
         break;
-        default:
-        // show an error in the console if the message type is unknown
+      default:
         throw new Error("Unknown event type " + obj.type);
     }
 
 
   });
 
-
-
-  // Set up a callback for when a client closes the socket. This usually means they closed their browser.
   ws.on('close', () => {
     console.log('Client disconnected');
-    const msgSize =  wss.clients.size;
+
    wss.broadcast(JSON.stringify({type: "userConnected", id: uuidv1(),content:wss.clients.size}));
 
  });
