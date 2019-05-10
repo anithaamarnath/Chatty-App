@@ -49,8 +49,8 @@ npm run lint
 
 
 ## Screenshot
-!["Screenshot of Tweet page"](https://github.com/anithaamarnath/Chatty-App/blob/master/screenshot/Screen%20Shot%202019-05-09%20at%205.48.39%20PM.png)
-!["Screenshot of Tweet page"](https://github.com/anithaamarnath/Chatty-App/blob/master/screenshot/Screen%20Shot%202019-05-09%20at%205.49.14%20PM.png)
+!["Screenshot of first window "](https://github.com/anithaamarnath/Chatty-App/blob/master/screenshot/Screen%20Shot%202019-05-09%20at%205.48.39%20PM.png)
+!["Screenshot of second window "](https://github.com/anithaamarnath/Chatty-App/blob/master/screenshot/Screen%20Shot%202019-05-09%20at%205.49.14%20PM.png)
 
 
 
