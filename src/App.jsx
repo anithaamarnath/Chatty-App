@@ -8,7 +8,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      currentUser :"Bob", messages: [],
+      currentUser :"Bob", messages: [], color: ['#a3fd7f'],
       userConnected: 0};
     this.addMessage = this.addMessage.bind(this);
     this.addCurrentUser = this.addCurrentUser.bind(this);
@@ -52,13 +52,15 @@ class App extends Component {
 
   }
 
-  addCurrentUser(username){
+  addCurrentUser(username,color){
 
-    const newMessage = {type: "postNotification", content: `${this.state.currentUser} the user name is changed ${username}`};
-     this.setState({currentUser: username });
+    const newMessage = {type: "postNotification", content: `${this.state.currentUser} the user name is changed ${username}`, color: `${this.state.color}`};
+    this.setState({currentUser: username });
     this.state.connection.send(JSON.stringify(newMessage));
 
   }
+
+
 
   render() {
     return (
